@@ -1,0 +1,43 @@
+  <body>
+    <!-- Body: layout tree and rendered sections -->
+    <b:class cond='data:view.isHomepage' name='is-home'/>
+    <b:class cond='data:view.isMultipleItems' name='is-multiple'/>
+    <b:class cond='data:view.isSingleItem' name='is-single'/>
+    <b:class cond='data:view.isPage' name='is-page'/>
+    <b:class cond='data:view.isPost' name='is-post'/>
+    <b:class cond='data:view.isError' name='is-multiple is-error'/>
+    <b:class cond='data:blog.isMobileRequest' name='is-mobile'/>
+    <b:class cond='data:skin.vars.fullwidth == &quot;1px&quot;' name='full-width'/>
+    <b:class cond='data:skin.vars.sidebar == &quot;1px&quot;' name='left-sidebar'/>
+    <b:class cond='data:skin.vars.background_cover == &quot;1px&quot;' name='background-cover'/>
+    <!-- Theme Options (hidden config widgets) -->
+    <div id='theme-options' style='display:none'>
+      <b:section class='ify-panel' id='ify-panel' maxwidgets='2' name='Theme Options' showaddelement='no'>
+        <b:widget id='TextList150' locked='true' title='Facebook SDK' type='TextList' version='2' visible='false'>
+          <b:includable id='main' var='this'>
+            <b:include name='widget-title'/>
+            <b:include name='content'/>
+          </b:includable>
+          <b:includable id='content'>
+            <b:include name='textlist-content'/>
+          </b:includable>
+        </b:widget>
+        <b:widget id='HTML150' locked='true' title='JSON Variables' type='HTML' version='2' visible='false'>
+          <b:widget-settings>
+            <b:widget-setting name='content'/>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <b:if cond='data:widget.sectionId == &quot;ify-panel&quot;'>
+              <b:if cond='data:content != &quot;&quot;'>
+                <b:include name='global-variables'/>
+              </b:if>
+              <b:else/>
+              <b:include name='widget-title'/>
+              <div class='widget-content'>
+                <data:content/>
+              </div>
+            </b:if>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    </div>

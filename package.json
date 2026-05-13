@@ -1,0 +1,9 @@
+{
+  "name": "blogger-theme-habonroof",
+  "private": true,
+  "scripts": {
+    "build:theme": "node scripts/merge-theme.mjs",
+    "extract:theme": "node scripts/extract-fragments.mjs",
+    "verify:theme": "node scripts/merge-theme.mjs theme/manifest.reference.json && cmp theme/theme-habonroof.reference.xml .theme-merge-verify.xml && rm .theme-merge-verify.xml"
+  }
+}

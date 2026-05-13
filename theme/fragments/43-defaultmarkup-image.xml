@@ -1,0 +1,31 @@
+      <b:defaultmarkup type='Image'>
+        <b:includable id='main' var='this'>
+          <b:include name='widget-title'/>
+          <b:include name='content'/>
+        </b:includable>
+        <b:includable id='content'>
+          <b:if cond='data:widget.sectionId == &quot;footer-about-section&quot;'>
+            <a class='footer-logo custom-image' expr:href='data:blog.homepageUrl'>
+              <img expr:alt='data:blog.title' expr:id='data:widget.instanceId + &quot;_img&quot;' expr:src='data:sourceUrl'/>
+            </a>
+            <b:if cond='data:caption'>
+              <p class='image-caption excerpt'>
+                <data:caption/>
+              </p>
+            </b:if>
+            <b:else/>
+            <div class='widget-content'>
+              <div class='custom-image'>
+                <b:tag cond='data:link' expr:href='data:link' name='a'>
+                  <img expr:alt='data:blog.title' expr:id='data:widget.instanceId + &quot;_img&quot;' expr:src='data:sourceUrl'/>
+                </b:tag>
+              </div>
+              <b:if cond='data:caption'>
+                <p class='image-caption excerpt'>
+                  <data:caption/>
+                </p>
+              </b:if>
+            </div>
+          </b:if>
+        </b:includable>
+      </b:defaultmarkup>

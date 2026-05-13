@@ -1,0 +1,6 @@
+    <b:include name='layout-js-options'/>
+    <!-- Hosted Plugins -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'/>
+    <!-- Templateify Plugins -->
+    <script type='text/javascript'>
+//<![CDATA[

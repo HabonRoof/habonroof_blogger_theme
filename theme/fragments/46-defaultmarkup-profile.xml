@@ -1,0 +1,25 @@
+      <b:defaultmarkup type='Profile'>
+        <b:includable id='userProfileImage'>
+          <a expr:href='data:userUrl' rel='nofollow' target='_blank'>
+            <b:include name='profileImage'/>
+          </a>
+        </b:includable>
+        <b:includable id='teamProfileLink'>
+          <a class='profile-link g-profile' expr:href='data:userUrl' rel='nofollow' target='_blank'>
+            <b:include name='profileImage'/>
+            <span class='profile-name'>
+              <data:display-name/>
+            </span>
+          </a>
+        </b:includable>
+        <b:includable id='userProfileLink'>
+          <a class='profile-link g-profile' expr:href='data:userUrl' rel='author nofollow' target='_blank'>
+            <data:displayname/>
+          </a>
+        </b:includable>
+        <b:includable id='viewProfileLink'>
+          <a class='profile-link' expr:href='data:userUrl' rel='author nofollow' target='_blank'>
+            <data:messages.viewMyCompleteProfile/>
+          </a>
+        </b:includable>
+      </b:defaultmarkup>

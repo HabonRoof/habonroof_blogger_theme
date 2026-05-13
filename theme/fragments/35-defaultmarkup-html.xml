@@ -1,0 +1,14 @@
+      <b:defaultmarkup type='HTML'>
+        <b:includable id='main'>
+          <b:if cond='data:widget.sectionId == &quot;ify-panel&quot;'>
+            <b:if cond='data:content != &quot;&quot;'>
+              <b:include name='global-variables'/>
+            </b:if>
+            <b:else/>
+            <b:include name='widget-title'/>
+            <div class='widget-content'>
+              <data:content/>
+            </div>
+          </b:if>
+        </b:includable>
+      </b:defaultmarkup>

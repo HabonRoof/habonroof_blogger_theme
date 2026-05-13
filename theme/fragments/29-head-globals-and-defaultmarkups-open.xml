@@ -1,0 +1,19 @@
+    <!-- Global Variables (runtime JS options) -->
+    <script defer='defer' type='text/javascript'>
+//<![CDATA[
+    // Global variables with content. "Available for Edit"
+    var monthFormat = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        noThumbnail = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjV6Y58NOC6asOSsTqAFvb9JfGB9iobfzOJLpNQ74AlwVnx1n4xAe6p_Z2jAnXw_Zl6t_qhyphenhyphen9QOFklWMg1cvOsVf86l5QtU8KglTgJ3TPknXSsSR7sJQtdu6CD-RLHz74rw-0x5NA0JRyc/w680/nth.png",
+        fixedMenu = true,
+        fixedSidebar = true,
+        darkMode = false,
+        relatedPostsNum = 3,
+        commentsSystem = "blogger",
+        disqusShortname = "templateify-theme",
+        fbCommentsTheme = "light",
+        viewAllText = "",
+        followByEmailText = "";
+//]]>
+</script>
+    <!-- Default widget markups and shared includables -->
+    <b:defaultmarkups>

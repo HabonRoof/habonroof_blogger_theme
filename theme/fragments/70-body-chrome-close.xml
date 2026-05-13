@@ -1,0 +1,23 @@
+    <!-- Mobile Menu, Overlay and Back To Top -->
+    <div id='slide-menu'>
+      <div class='slide-menu-header'>
+        <div class='mobile-search'>
+          <form class='search-form' expr:action='data:blog.searchUrl' role='search'>
+            <input autocomplete='off' class='search-input' expr:placeholder='data:messages.search' name='q' value=''/>
+            <button class='search-action' type='submit' value=''/>
+          </form>
+        </div>
+        <span class='hide-lightify-pro-mobile-menu'/>
+      </div>
+      <div class='slide-menu-flex'>
+        <div class='lightify-pro-mobile-menu' id='lightify-pro-mobile-menu'/>
+        <div class='mobile-menu-footer'>
+          <div class='mobile-navbar-social'/>
+          <div class='mobile-navbar-menu'/>
+        </div>
+      </div>
+    </div>
+    <div class='overlay'/>
+    <a class='back-top' href='javascript:;'/>
+  </body>
+</html>

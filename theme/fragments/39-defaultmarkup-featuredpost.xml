@@ -1,0 +1,154 @@
+      <b:defaultmarkup type='FeaturedPost'>
+        <b:includable id='main' var='this'>
+          <b:include name='widget-title'/>
+          <div class='widget-content'>
+            <b:loop values='data:posts' var='post'>
+              <b:include data='post' name='content'/>
+            </b:loop>
+          </div>
+        </b:includable>
+        <b:includable id='blogThisShare'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='bylineByName' var='byline'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='bylineRegion' var='regionItems'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='commentsLink'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='commentsLinkIframe'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='content' var='post'>
+          <article class='featured-post post'>
+            <div class='featured-post-inner'>
+              <b:if cond='data:post.labels'>
+                <span class='entry-category'>
+                  <data:post.labels.first.name/>
+                </span>
+              </b:if>
+              <b:if cond='data:post.featuredImage'>
+                <b:if cond='data:post.featuredImage.isYouTube'>
+                  <a class='entry-image-link before-mask' expr:href='data:post.url'>
+                    <span class='entry-thumb' expr:data-image='data:post.featuredImage'/>
+                  </a>
+                  <b:else/>
+                  <a class='entry-image-link before-mask' expr:href='data:post.url'>
+                    <span class='entry-thumb' expr:data-image='resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)'/>
+                  </a>
+                </b:if>
+                <b:else/>
+                <a class='entry-image-link before-mask' expr:href='data:post.url'>
+                  <span class='entry-thumb' data-image='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvLicYUj_7v_kvi3oTWgSa2ZELk27ZwTaUoX4FW1sRSCmS1H8pk7pgApI7oOQ8CFZNq8RtZ1sURrqnMHCs_8Yfi53lIuuutlMoR2xMAXJVdHdTWsYGkA2n8ZUP1R-xkxJoFyI5bhob_P0/s72-c/nth-ify.png'/>
+                </a>
+              </b:if>
+              <div class='entry-header entry-info'>
+                <h2 class='entry-title'>
+                  <a expr:href='data:post.url'>
+                    <data:post.title/>
+                  </a>
+                </h2>
+                <b:if cond='data:widgets.Blog.first.allBylineItems.author or data:widgets.Blog.first.allBylineItems.timestamp'>
+                  <div class='entry-meta'>
+                    <b:if cond='data:widgets.Blog.first.allBylineItems.author'>
+                      <span class='entry-author'>
+                        <span class='author'>
+                          <data:post.author.name/>
+                        </span>
+                      </span>
+                    </b:if>
+                    <b:if cond='data:widgets.Blog.first.allBylineItems.timestamp'>
+                      <span class='entry-time'>
+                        <time class='published' expr:datetime='data:post.date.iso8601'>
+                          <data:post.date/>
+                        </time>
+                      </span>
+                    </b:if>
+                  </div>
+                </b:if>
+              </div>
+            </div>
+          </article>
+        </b:includable>
+        <b:includable id='emailPostIcon'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='facebookShare'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='footerBylines'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='googlePlusShare'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='headerByline'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='linkShare'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='otherSharingButton'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='platformShare'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postAuthor'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postCommentsLink'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postJumpLink' var='post'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postLabels'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postLocation'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postReactions'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postShareButtons'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='postTimestamp'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='sharingButton'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='sharingButtonContent'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='sharingButtons'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='sharingButtonsMenu'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='sharingPlatformIcon'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='snippetedPostByline'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='snippetedPostContent'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='snippetedPostThumbnail'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='snippetedPostTitle'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+        <b:includable id='snippetedPosts'>
+          <b:comment>Removed :)</b:comment>
+        </b:includable>
+      </b:defaultmarkup>

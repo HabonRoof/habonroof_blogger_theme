@@ -11725,12 +11725,6 @@ $(".post-body a").each(function() {
 	})
 //]]>
 </script>
-    <!-- Custom JavaScript (extensions after theme init) -->
-    <script type='text/javascript'>
-//<![CDATA[
-// Add custom tools here, or add a new fragment in theme/manifest.json after 64-theme-init.js.
-//]]>
-</script>
     <!-- Mobile Menu, Overlay and Back To Top -->
     <div id='slide-menu'>
       <div class='slide-menu-header'>

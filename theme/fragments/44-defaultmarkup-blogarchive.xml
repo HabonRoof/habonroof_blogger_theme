@@ -1,0 +1,24 @@
+      <b:defaultmarkup type='BlogArchive'>
+        <b:includable id='main' var='this'>
+          <b:include name='widget-title'/>
+          <b:include name='content'/>
+        </b:includable>
+        <b:includable id='content'>
+          <div class='widget-content'>
+            <b:class name='archive-list'/>
+            <b:include cond='data:this.style in {&quot;FLAT&quot;, &quot;MENU&quot;, &quot;HIERARCHY&quot;}' name='flat'/>
+          </div>
+        </b:includable>
+        <b:includable id='flat'>
+          <ul>
+            <b:loop values='data:data' var='i'>
+              <li>
+                <a class='archive-name' expr:href='data:i.url'>
+                  <data:i.name/>
+                  <span class='archive-count'>(<data:i.post-count/>)</span>
+                </a>
+              </li>
+            </b:loop>
+          </ul>
+        </b:includable>
+      </b:defaultmarkup>

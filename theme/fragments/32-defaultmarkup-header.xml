@@ -1,0 +1,36 @@
+      <b:defaultmarkup type='Header'>
+        <b:includable id='main' var='this'>
+          <div class='logo-content'>
+            <b:include cond='data:imagePlacement in {&quot;REPLACE&quot;, &quot;BEFORE_DESCRIPTION&quot;}' name='image'/>
+            <b:include cond='data:imagePlacement == &quot;BEHIND&quot;' name='title'/>
+          </div>
+          <b:include cond='data:widget.sectionId == &quot;main-logo&quot;' name='extra'/>
+        </b:includable>
+        <b:includable id='image'>
+          <a class='logo-img' expr:href='data:blog.homepageUrl'>
+            <img expr:alt='data:blog.title.escaped' expr:data-height='data:height' expr:data-width='data:width' expr:src='data:image'/>
+            <b:if cond='data:view.isMultipleItems'>
+              <b:if cond='data:widget.sectionId == &quot;main-logo&quot;'>
+                <h1 id='h1-tag'>
+                  <data:title/>
+                </h1>
+              </b:if>
+            </b:if>
+          </a>
+        </b:includable>
+        <b:includable id='extra'>
+          <div class='toggle-content'>
+            <b:tag class='mobile-darkmode-toggle' cond='data:skin.vars.darkmode == &quot;0px&quot;' href='javascript:;' name='a'/>
+            <a class='mobile-menu-toggle' href='javascript:;'/>
+          </div>
+        </b:includable>
+        <b:includable id='title'>
+          <b:tag class='blog-title' cond='data:view.isMultipleItems' name='h1'>
+            <b:tag class='blog-title' cond='data:view.isSingleItem' name='span'>
+              <b:tag expr:href='data:blog.homepageUrl' name='a'>
+                <data:title/>
+              </b:tag>
+            </b:tag>
+          </b:tag>
+        </b:includable>
+      </b:defaultmarkup>

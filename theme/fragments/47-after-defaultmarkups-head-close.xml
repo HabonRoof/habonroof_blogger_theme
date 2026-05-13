@@ -1,0 +1,14 @@
+    </b:defaultmarkups>
+    <b:if cond='data:widgets.AdSense.first or data:blog.adsenseClientId'>
+      <!-- Google AdSense -->
+      <script async='async' src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
+    </b:if>
+    <b:if cond='data:blog.analyticsAccountNumber != &quot;&quot;'>
+      <!-- Google Analytics -->
+      <b:include data='blog' name='google-analytics'/>
+    </b:if>
+    <b:if cond='data:widgets any w =&gt; w.sectionId in [&quot;featured&quot;, &quot;lightify-pro-content-blocks-1&quot;, &quot;lightify-pro-content-blocks-2&quot;]'>
+      <!-- Custom Colors CSS -->
+      <b:tag id='page-skin-2' name='style' type='text/css'/>
+    </b:if>
+  </head>

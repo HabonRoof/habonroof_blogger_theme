@@ -1,0 +1,18 @@
+      <b:defaultmarkup type='Text'>
+        <b:includable id='main'>
+          <b:if cond='data:widget.sectionId == &quot;footer-copyright&quot;'>
+            <b:if cond='data:content == &quot;normal&quot;'>
+              <span class='copyright-text'>Copyright &#169; <script type='text/javascript'>var year = new Date();document.write(year.getFullYear());</script> <a expr:href='data:blog.homepageUrl'><data:blog.title/></a></span>
+              <b:else/>
+              <span class='copyright-text'>
+                <data:content/>
+              </span>
+            </b:if>
+            <b:else/>
+            <b:include name='widget-title'/>
+            <div class='widget-content'>
+              <data:content/>
+            </div>
+          </b:if>
+        </b:includable>
+      </b:defaultmarkup>

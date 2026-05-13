@@ -1,0 +1,330 @@
+      <!-- Footer Wrapper -->
+      <footer id='footer-wrapper'>
+        <b:class cond='data:widgets none w =&gt; w.sectionId == &quot;footer-about-section&quot;' name='compact-footer'/>
+        <b:class cond='data:skin.vars.outer_bg == data:skin.vars.footer_bg' name='border'/>
+        <div class='primary-footer'>
+          <b:class cond='data:skin.vars.footerbar_bg == data:skin.vars.footer_bg' name='border'/>
+          <div class='container row-x1'>
+            <b:section class='footer-about-section' id='footer-about-section' maxwidgets='2' name='About Section' showaddelement='yes'>
+              <b:widget id='Image150' locked='true' title='About Me' type='Image' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEhGB_2UDqnQqTQkOToPledU0r85e9-bR2TOq3tg2laV4dmGzlgpbya4yexVeoe1-U1jVsu8IO7xQBHkz3-uzO6wQ_qviVPSKmM6yuUBHj6qywNstVNz7tBPT2mrCNRIROLelotwv7uP0_LMT9C6MUBh4YuauKMp0EZ3DEYNSYUZLZXf7-U4LL_Gf4gSuRU=s307</b:widget-setting>
+                  <b:widget-setting name='displayHeight'>105</b:widget-setting>
+                  <b:widget-setting name='sectionWidth'>1160</b:widget-setting>
+                  <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+                  <b:widget-setting name='displayWidth'>307</b:widget-setting>
+                  <b:widget-setting name='link'>/</b:widget-setting>
+                  <b:widget-setting name='caption'>一位漂流在軟體與硬體之間的邊緣行者&#65292;COVID期間被觸發想做技術部落格&#65292;目前還是剛出社會的新鮮人&#65292;除了工作也希望能在閒暇之餘撰寫教學文章與製作影片&#12290;現在正努力豐富網站內容中</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main' var='this'>
+                  <b:include name='widget-title'/>
+                  <b:include name='content'/>
+                </b:includable>
+                <b:includable id='content'>
+                  <b:if cond='data:widget.sectionId == &quot;footer-about-section&quot;'>
+                    <a class='footer-logo custom-image' expr:href='data:blog.homepageUrl'>
+                      <img expr:alt='data:blog.title' expr:id='data:widget.instanceId + &quot;_img&quot;' expr:src='data:sourceUrl'/>
+                    </a>
+                    <b:if cond='data:caption'>
+                      <p class='image-caption excerpt'>
+                        <data:caption/>
+                      </p>
+                    </b:if>
+                    <b:else/>
+                    <div class='widget-content'>
+                      <div class='custom-image'>
+                        <b:tag cond='data:link' expr:href='data:link' name='a'>
+                          <img expr:alt='data:blog.title' expr:id='data:widget.instanceId + &quot;_img&quot;' expr:src='data:sourceUrl'/>
+                        </b:tag>
+                      </div>
+                      <b:if cond='data:caption'>
+                        <p class='image-caption excerpt'>
+                          <data:caption/>
+                        </p>
+                      </b:if>
+                    </div>
+                  </b:if>
+                </b:includable>
+              </b:widget>
+              <b:widget id='TextList152' locked='true' title='Follow Me on' type='TextList' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='shownum'/>
+                  <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                  <b:widget-setting name='item-2'><![CDATA[{icon: "instagram", url: "https://www.instagram.com"}]]></b:widget-setting>
+                  <b:widget-setting name='item-1'><![CDATA[{icon: "youtube", url: "https://www.youtube.com/@HabonRoofPlayground"}]]></b:widget-setting>
+                  <b:widget-setting name='item-0'><![CDATA[{icon: "facebook", url: "https://www.facebook.com"}]]></b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main' var='this'>
+                  <b:include name='widget-title'/>
+                  <b:include name='content'/>
+                </b:includable>
+                <b:includable id='content'>
+                  <b:include name='textlist-content'/>
+                </b:includable>
+              </b:widget>
+            </b:section>
+          </div>
+        </div>
+        <div class='footer-widgets-wrap'>
+          <div class='container row-x1'>
+            <b:section class='footer-widget lightify-pro-widget-ready' id='footer-sec1' maxwidgets='3' name='Section (Left)' showaddelement='yes'>
+              <b:widget id='PopularPosts2' locked='false' title='Most Popular' type='PopularPosts' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
+                  <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+                  <b:widget-setting name='showSnippets'>true</b:widget-setting>
+                  <b:widget-setting name='timeRange'>LAST_WEEK</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main' var='this'>
+                  <b:include name='widget-title'/>
+                  <div class='widget-content'>
+                    <b:loop index='i' values='data:posts' var='post'>
+                      <b:include data='post' name='content'/>
+                    </b:loop>
+                  </div>
+                </b:includable>
+                <b:includable id='blogThisShare'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='break-section' var='post'>
+                  <b:if cond='data:i lt 10'>
+                    <li class='ticker-item'>
+                      <b:class expr:name='&quot;item-&quot;+data:i'/>
+                      <div class='post-info'>
+                        <b:if cond='data:post.labels'>
+                          <span class='post-tag'>
+                            <data:post.labels.first.name/>
+                          </span>
+                        </b:if>
+                        <h2 class='post-title'>
+                          <a expr:href='data:post.url'>
+                            <data:post.title/>
+                          </a>
+                        </h2>
+                      </div>
+                    </li>
+                  </b:if>
+                </b:includable>
+                <b:includable id='bylineByName' var='byline'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='bylineRegion' var='regionItems'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='commentsLink'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='commentsLinkIframe'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='content' var='post'>
+                  <article class='popular-post post'>
+                    <b:class expr:name='&quot;item-&quot;+data:i'/>
+                    <b:if cond='data:post.featuredImage'>
+                      <b:if cond='data:post.featuredImage.isYouTube'>
+                        <a class='entry-image-link' expr:href='data:post.url'>
+                          <span class='entry-thumb' expr:data-image='data:post.featuredImage'/>
+                        </a>
+                        <b:else/>
+                        <a class='entry-image-link' expr:href='data:post.url'>
+                          <span class='entry-thumb' expr:data-image='resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)'/>
+                        </a>
+                      </b:if>
+                      <b:else/>
+                      <a class='entry-image-link' expr:href='data:post.url'>
+                        <span class='entry-thumb' data-image='https://4.bp.blogspot.com/-eALXtf-Ljts/WrQYAbzcPUI/AAAAAAAABjY/vptx-N2H46oFbiCqbSe2JgVSlHhyl0MwQCK4BGAYYCw/s72-c/nth-ify.png'/>
+                      </a>
+                    </b:if>
+                    <div class='entry-header'>
+                      <h2 class='entry-title'>
+                        <a expr:href='data:post.url'>
+                          <data:post.title/>
+                        </a>
+                      </h2>
+                      <b:if cond='data:widgets.Blog.first.allBylineItems.timestamp'>
+                        <div class='entry-meta'>
+                          <span class='entry-time'>
+                            <time class='published' expr:datetime='data:post.date.iso8601'>
+                              <data:post.date/>
+                            </time>
+                          </span>
+                        </div>
+                      </b:if>
+                    </div>
+                  </article>
+                </b:includable>
+                <b:includable id='emailPostIcon'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='facebookShare'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='footerBylines'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='googlePlusShare'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='headerByline'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='linkShare'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='otherSharingButton'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='platformShare'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postAuthor'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postCommentsLink'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postContent' var='post'>
+                  <b:if cond='data:widget.sectionId == &quot;break-section&quot;'>
+                    <b:include data='post' name='break-section'/>
+                    <b:else/>
+                    <b:include data='post' name='content'/>
+                  </b:if>
+                </b:includable>
+                <b:includable id='postJumpLink' var='post'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postLabels'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postLocation'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postReactions'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postShareButtons'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='postTimestamp'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='sharingButton'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='sharingButtonContent'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='sharingButtons'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='sharingButtonsMenu'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='sharingPlatformIcon'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='snippetedPostByline'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='snippetedPostContent'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='snippetedPostThumbnail'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='snippetedPostTitle'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+                <b:includable id='snippetedPosts'>
+                  <b:comment>Removed :)</b:comment>
+                </b:includable>
+              </b:widget>
+            </b:section>
+            <b:section class='footer-widget lightify-pro-widget-ready' id='footer-sec2' maxwidgets='3' name='Section (Center)' showaddelement='yes'>
+              <b:widget id='HTML19' locked='false' title='Latest' type='HTML' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='content'>{getWidget} $results={3} $label={recent} $type={list2}</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:widget.sectionId == &quot;ify-panel&quot;'>
+                    <b:if cond='data:content != &quot;&quot;'>
+                      <b:include name='global-variables'/>
+                    </b:if>
+                    <b:else/>
+                    <b:include name='widget-title'/>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+                  </b:if>
+                </b:includable>
+              </b:widget>
+            </b:section>
+            <b:section class='footer-widget lightify-pro-widget-ready' id='footer-sec3' maxwidgets='3' name='Section (Right)' showaddelement='yes'>
+              <b:widget id='HTML20' locked='false' title='MCU Topic' type='HTML' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='content'>{getWidget} $results={3} $label={MCU} $type={list1}</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:widget.sectionId == &quot;ify-panel&quot;'>
+                    <b:if cond='data:content != &quot;&quot;'>
+                      <b:include name='global-variables'/>
+                    </b:if>
+                    <b:else/>
+                    <b:include name='widget-title'/>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+                  </b:if>
+                </b:includable>
+              </b:widget>
+            </b:section>
+          </div>
+        </div>
+        <div class='footerbar'>
+          <div class='container row-x1'>
+            <b:section class='footer-copyright' id='footer-copyright' maxwidgets='1' name='Footer Copyright' showaddelement='yes'>
+              <b:widget id='Text150' locked='true' title='' type='Text' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='content'>normal</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main'>
+                  <b:if cond='data:widget.sectionId == &quot;footer-copyright&quot;'>
+                    <b:if cond='data:content == &quot;normal&quot;'>
+                      <span class='copyright-text'>Copyright &#169; <script type='text/javascript'>var year = new Date();document.write(year.getFullYear());</script> <a expr:href='data:blog.homepageUrl'><data:blog.title/></a></span>
+                      <b:else/>
+                      <span class='copyright-text'>
+                        <data:content/>
+                      </span>
+                    </b:if>
+                    <b:else/>
+                    <b:include name='widget-title'/>
+                    <div class='widget-content'>
+                      <data:content/>
+                    </div>
+                  </b:if>
+                </b:includable>
+              </b:widget>
+            </b:section>
+            <b:section class='footer-menu' id='footer-menu' maxwidgets='1' name='Footer Menu' showaddelement='yes'>
+              <b:widget id='LinkList159' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
+                <b:widget-settings>
+                  <b:widget-setting name='sorting'>NONE</b:widget-setting>
+                  <b:widget-setting name='text-1'>About</b:widget-setting>
+                  <b:widget-setting name='link-1'>https://www.habonroof-playground.com/2022/10/coding-playing.html</b:widget-setting>
+                  <b:widget-setting name='text-0'>Home</b:widget-setting>
+                  <b:widget-setting name='link-2'>https://www.habonroof-playground.com/p/blog-page_7.html</b:widget-setting>
+                  <b:widget-setting name='link-0'>/</b:widget-setting>
+                  <b:widget-setting name='text-2'>Contact</b:widget-setting>
+                </b:widget-settings>
+                <b:includable id='main' var='this'>
+                  <b:include name='widget-title'/>
+                  <b:include name='content'/>
+                </b:includable>
+                <b:includable id='content'>
+                  <b:include name='linklist-content'/>
+                </b:includable>
+              </b:widget>
+            </b:section>
+          </div>
+        </div>
+      </footer>

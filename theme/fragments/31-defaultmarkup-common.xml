@@ -1,0 +1,208 @@
+      <b:defaultmarkup type='Common'>
+        <b:includable id='widget-title'>
+          <b:if cond='data:widget.sectionId == &quot;sidebar-tabs&quot;'>
+            <b:attr expr:value='data:title' name='tab-ify'/>
+            <b:else/>
+            <b:if cond='data:title == &quot;no-style&quot;'>
+              <b:class name='no-style'/>
+              <b:elseif cond='data:widget.type == &quot;AdSense&quot;'/>
+              <b:class name='no-style'/>
+            </b:if>
+            <b:if cond='data:defaultTitle or data:title'>
+              <b:if cond='data:widget.sectionId not in [&quot;main-navbar-menu&quot;,&quot;main-navbar-social&quot;,&quot;lightify-pro-main-menu&quot;,&quot;featured&quot;,&quot;header-ads&quot;, &quot;home-ads-1&quot;, &quot;home-ads-2&quot;,&quot;footer-about-section&quot;,&quot;footer-copyright&quot;,&quot;footer-menu&quot;]'>
+                <div class='widget-title'>
+                  <b:class cond='data:widget.sectionId in [&quot;lightify-pro-content-blocks-1&quot;, &quot;lightify-pro-content-blocks-2&quot;, &quot;sidebar&quot;, &quot;sidebar-b&quot;, &quot;footer-sec1&quot;, &quot;footer-sec2&quot;, &quot;footer-sec3&quot;]' name='title-wrap'/>
+                  <h3 class='title'>
+                    <data:title/>
+                  </h3>
+                </div>
+              </b:if>
+            </b:if>
+          </b:if>
+        </b:includable>
+        <b:includable id='head-content'>
+          <meta expr:content='&quot;text/html; charset=&quot; + data:blog.encoding' http-equiv='Content-Type'/>
+          <meta content='blogger' name='generator'/>
+          <link expr:href='data:blog.blogspotFaviconUrl' rel='icon' type='image/x-icon'/>
+          <meta expr:content='data:skin.vars.main_color' name='theme-color'/>
+          <meta expr:content='data:skin.vars.main_color' name='msapplication-navbutton-color'/>
+          <b:if cond='data:blog.adultContent'>
+            <meta content='adult' name='rating'/>
+          </b:if>
+          <link expr:href='data:view.url.canonical' rel='canonical'/>
+          <data:blog.feedLinks/>
+          <data:blog.meTag/>
+          <meta expr:content='data:view.description.escaped' name='description'/>
+          <b:tag cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage' expr:href='data:widgets.Blog.first.posts[0].featuredImage' name='link' rel='image_src'/>
+          <b:tag cond='data:view.isSingleItem and data:view.featuredImage' expr:href='data:view.featuredImage' name='link' rel='image_src'/>
+          <b:include name='customOpenGraphMetaData'/>
+        </b:includable>
+        <b:includable id='customOpenGraphMetaData'>
+          <!-- Metadata for Open Graph protocol. See http://ogp.me/. -->
+          <b:if cond='data:view.isHomepage'>
+            <meta content='website' property='og:type'/>
+          </b:if>
+          <b:if cond='data:view.isSingleItem'>
+            <meta content='article' property='og:type'/>
+          </b:if>
+          <b:if cond='data:view.isMultipleItems and not data:view.isHomepage'>
+            <meta content='object' property='og:type'/>
+          </b:if>
+          <meta expr:content='data:view.title.escaped' property='og:title'/>
+          <meta expr:content='data:blog.url.canonical' property='og:url'/>
+          <meta expr:content='data:view.description.escaped' property='og:description'/>
+          <meta expr:content='data:blog.title.escaped' property='og:site_name'/>
+          <b:tag cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage' expr:content='data:widgets.Blog.first.posts[0].featuredImage' name='meta' property='og:image'/>
+          <b:if cond='data:view.featuredImage'>
+            <meta expr:content='data:view.featuredImage' property='og:image'/>
+            <meta expr:content='data:view.featuredImage' name='twitter:image'/>
+          </b:if>
+          <meta content='summary_large_image' name='twitter:card'/>
+          <meta expr:content='data:view.title.escaped' name='twitter:title'/>
+          <meta expr:content='data:blog.url.canonical' name='twitter:domain'/>
+          <meta expr:content='data:view.description.escaped' name='twitter:description'/>
+          <b:if cond='data:view.isHomepage'>
+            <script type='application/ld+json'>{&quot;@context&quot;:&quot;http://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:view.title.escaped/>&quot;,&quot;url&quot;:&quot;<data:view.url.canonical/>&quot;,&quot;potentialAction&quot;:{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:&quot;<data:view.url.canonical/>search?q={search_term_string}&quot;,&quot;query-input&quot;:&quot;required name=search_term_string&quot;}}</script>
+          </b:if>
+          <b:tag cond='data:blog.languageDirection == &quot;rtl&quot;' href='https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&amp;display=swap' name='link' rel='stylesheet'/>
+        </b:includable>
+        <b:includable id='translate'>
+          <b:switch var='data:blog.locale.language'>
+            <b:case value='en'/>
+            <b:include name='customLang'/>
+            <b:default/>
+            <b:include name='customLang'/>
+          </b:switch>
+        </b:includable>
+        <b:includable id='customLang'>
+          <b:switch var='data:message'>
+            <b:case value='prevPost'/>
+            <b:if cond='data:blog.locale.language == &quot;en&quot;'>Previous Post<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Artículo Anterior<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Postagem Anterior<b:else/><data:messages.newer/></b:if>
+            <b:case value='nextPost'/>
+            <b:if cond='data:blog.locale.language == &quot;en&quot;'>Next Post<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Artículo Siguiente<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Próxima Postagem<b:else/><data:messages.older/></b:if>
+            <b:case value='followByEmailText'/>
+            <b:if cond='data:blog.locale.language == &quot;en&quot;'>Get all latest content delivered straight to your inbox.<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Obtener todo el contenido más reciente directamente en su correo electrónico.<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Obtenha todo o conteúdo mais recente diretamente na sua caixa de entrada.<b:else/><data:messages.getEmailNotifications/></b:if>
+            <b:case value='loadMorePosts'/>
+            <b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga Más<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:else/><data:messages.loadMorePosts/></b:if>
+            <b:case value='noMorePosts'/>
+            <b:if cond='data:blog.locale.language == &quot;en&quot;'>That is All<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Eso es Todo<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Isso é Tudo<b:else/><data:messages.noResultsFound/></b:if>
+          </b:switch>
+        </b:includable>
+        <b:includable id='linklist-content'>
+          <b:if cond='data:widget.sectionId == &quot;lightify-pro-main-menu&quot;'>
+            <ul id='lightify-pro-main-menu-nav' role='menubar'>
+              <b:loop values='data:links' var='link'>
+                <li>
+                  <a expr:data-text='data:link.name' expr:href='data:link.target' role='menuitem'>
+                    <data:link.name/>
+                  </a>
+                </li>
+              </b:loop>
+            </ul>
+            <b:elseif cond='data:widget.sectionId == &quot;main-navbar-menu&quot;'/>
+            <ul class='menu'>
+              <b:loop values='data:links' var='link'>
+                <li>
+                  <a expr:href='data:link.target'>
+                    <data:link.name/>
+                  </a>
+                </li>
+              </b:loop>
+            </ul>
+            <b:else/>
+            <div class='widget-content'>
+              <ul>
+                <b:loop values='data:links' var='link'>
+                  <li>
+                    <a expr:href='data:link.target'>
+                      <data:link.name/>
+                    </a>
+                  </li>
+                </b:loop>
+              </ul>
+            </div>
+          </b:if>
+        </b:includable>
+        <b:includable id='textlist-content'>
+          <b:if cond='data:widget.sectionId == &quot;ify-panel&quot;'>
+            <b:loop index='i' values='data:items' var='item'>
+              <b:if cond='data:i == 0'>
+                <script async='async' crossorigin='anonymous' defer='defer' expr:src='data:item'/>
+              </b:if>
+            </b:loop>
+            <b:elseif cond='data:widget.sectionId == &quot;main-navbar-social&quot;'/>
+            <ul class='social'>
+              <b:loop index='i' values='data:items' var='item'>
+                <b:with expr:value='data:item' var='social'>
+                  <li expr:class='data:social.icon'>
+                    <a expr:class='data:social.icon' expr:href='data:social.url' target='_blank'/>
+                  </li>
+                </b:with>
+              </b:loop>
+            </ul>
+            <b:elseif cond='data:widget.sectionId in [&quot;sidebar&quot;, &quot;sidebar-tabs&quot;, &quot;sidebar-b&quot;, &quot;sidebar-ads&quot;]'/>
+            <div class='widget-content'>
+              <ul class='social-icons social social-bg'>
+                <b:loop index='i' values='data:items' var='item'>
+                  <b:with expr:value='data:item' var='social'>
+                    <li expr:class='data:social.icon + &quot; link-&quot; + data:i'>
+                      <a expr:class='data:social.icon' expr:href='data:social.url' target='_blank'>
+                        <b:if cond='data:social.count'>
+                          <span class='count'>
+                            <data:social.count/>
+                          </span>
+                        </b:if>
+                      </a>
+                    </li>
+                  </b:with>
+                </b:loop>
+              </ul>
+            </div>
+            <b:elseif cond='data:widget.sectionId == &quot;footer-about-section&quot;'/>
+            <ul class='social-footer social social-bg-hover'>
+              <b:loop index='i' values='data:items' var='item'>
+                <b:with expr:value='data:item' var='social'>
+                  <li expr:class='data:social.icon'>
+                    <a expr:class='data:social.icon' expr:href='data:social.url' target='_blank'/>
+                  </li>
+                </b:with>
+              </b:loop>
+            </ul>
+            <b:else/>
+            <div class='widget-content'>
+              <ul>
+                <b:loop values='data:items' var='item'>
+                  <li>
+                    <data:item/>
+                  </li>
+                </b:loop>
+              </ul>
+            </div>
+          </b:if>
+        </b:includable>
+        <b:includable id='layout-js-options'>
+          <b:if cond='data:skin.vars.fixedmenu == &quot;0px&quot; or (data:skin.vars.fixedsidebar == &quot;0px&quot;) or (data:skin.vars.darkmode == &quot;1px&quot;) or (data:view.isSingleItem and data:skin.vars.fbdarktheme == &quot;1px&quot;)'><!-- Layout Js Options -->
+      &lt;script defer=&#39;defer&#39; type=&#39;text/javascript&#39;&gt;<b:if cond='data:skin.vars.fixedmenu == &quot;0px&quot;'>var fixedMenu=false;</b:if><b:if cond='data:skin.vars.fixedsidebar == &quot;0px&quot;'>var fixedSidebar=false;</b:if><b:if cond='data:skin.vars.darkmode == &quot;1px&quot;'>var darkMode=true;</b:if><b:if cond='data:skin.vars.darkmode == &quot;1px&quot;'>var fbCommentsTheme=&quot;dark&quot;;</b:if><b:if cond='data:view.isSingleItem and (data:skin.vars.fbdarktheme == &quot;1px&quot;) and (data:skin.vars.darkmode != &quot;1px&quot;)'>var fbCommentsTheme=&quot;dark&quot;;</b:if>&lt;/script&gt;
+      </b:if>
+        </b:includable>
+        <b:includable id='global-variables'>
+      &lt;!-- New Global Variables --&gt;
+      &lt;script defer=&#39;defer&#39; type=&#39;text/javascript&#39;&gt;
+      //&lt;![CDATA[
+      <b:with expr:value='data:content' var='option'><b:if cond='data:option.months'>
+            var monthFormat = [&quot;<data:option.months.jan/>&quot;,&quot;<data:option.months.feb/>&quot;,&quot;<data:option.months.mar/>&quot;,&quot;<data:option.months.apr/>&quot;,&quot;<data:option.months.may/>&quot;,&quot;<data:option.months.jun/>&quot;,&quot;<data:option.months.jul/>&quot;,&quot;<data:option.months.aug/>&quot;,&quot;<data:option.months.sep/>&quot;,&quot;<data:option.months.oct/>&quot;,&quot;<data:option.months.nov/>&quot;,&quot;<data:option.months.dec/>&quot;];
+          </b:if><b:if cond='data:option.relatedPostsNum'>
+            var relatedPostsNum = <data:option.relatedPostsNum/>;
+          </b:if><b:if cond='data:option.viewAllText'>
+            var viewAllText = &quot;<data:option.viewAllText/>&quot;;
+          </b:if><b:if cond='data:option.followByEmailText'>
+            var followByEmailText = &quot;<data:option.followByEmailText/>&quot;;
+          </b:if><b:if cond='data:option.commentsSystem'>
+            var commentsSystem = &quot;<data:option.commentsSystem/>&quot;;
+          </b:if><b:if cond='data:option.disqusShortname'>
+            var disqusShortname = &quot;<data:option.disqusShortname/>&quot;;
+          </b:if></b:with>
+      //]]&gt;
+      &lt;/script&gt;
+    </b:includable>
+      </b:defaultmarkup>

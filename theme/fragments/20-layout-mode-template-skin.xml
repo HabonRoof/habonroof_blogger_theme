@@ -1,0 +1,258 @@
+    <b:if cond='data:view.isLayoutMode'>
+      <!-- Layout editor skin (Blogger layout mode) -->
+      <b:template-skin><![CDATA[
+html,body#layout #outer-wrapper,body#layout .row{
+    width:auto;
+    padding:0
+}
+ body#layout{
+    position:relative;
+    width:910px;
+    background-color:#f9f9f9;
+    padding:95px 5px 0;
+    margin:0
+}
+ body#layout:before{
+    content:'Lightify - Version - 1.0';
+    position:absolute;
+    top:0;
+    left:5px;
+    right:5px;
+    height:95px;
+    font-family:Roboto,sans-serif;
+    font-size:23px;
+    color:#1f2024;
+    line-height:95px;
+    text-align:center
+}
+ body#layout div.section{
+    display:block;
+    background-color:#f1f1f1!important;
+    margin:0 5px 10px!important;
+    padding:16px 16px 18px!important;
+    border-color:#e5e5e5
+}
+ body#layout .no-items.section{
+    display:block
+}
+ body#layout .section h4{
+    font-size:14px;
+    color:#1f2024;
+    text-transform:uppercase;
+    margin:0
+}
+ body#layout .section h4:after{
+    text-transform:initial;
+    color:#656565;
+    font-weight:400
+}
+ body#layout .add_widget a{
+    color:#3c97ef!important
+}
+ body#layout .widget-wrap3{
+    overflow:hidden
+}
+ body#layout .widget-content{
+    width:auto;
+    max-width:none;
+    max-height:none;
+    margin:0;
+    border:1px solid #e5e5e5;
+    border-left:0
+}
+ body#layout .locked-widget .widget-content{
+    border-left:1px solid #3c97ef
+}
+ body#layout .locked-widget .widget-content:hover{
+    border-left-color:#00b140
+}
+ body#layout .widget .widget-content a.editlink{
+    border-radius:2px
+}
+ body#layout .visibility .editlink{
+    background:#3c97ef url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRM3QITi7w0ppZgXh4yDsSw2iAFNWj5seEBCpEildSyc_l5jPZUaUkaEJ6MSOhqMB63sRlgmB4nPjjgTaT2MK6NqQEbFmtnF2ozWmOfLuDd-REzpnmb1RY02xPk4lRibQg6lUA3v0UYe4/s18-c/mode_edit_w600_24dp.png) no-repeat center!important
+}
+ body#layout .visibility .editlink:hover{
+    background-color:#00b140!important
+}
+ body#layout .draggable-widget .widget-wrap2{
+    background:#3c97ef url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJoH_5gMu3gRckoKXLAtCi1lxogLBXHP98A7SpXtoYikPYeLfFb091-oWLFYhUTl-LnD-TQnNDFtY8_RuVM3FJc15FgS4VheqE8DqIJRGoObTQcDFy5qXlQn4cQBZT7of38qWYpj7rOdA/s22/draggable.png) no-repeat 4px 50%!important
+}
+ body#layout .draggable-widget .widget-wrap1:hover .widget-wrap2{
+    background-color:#00b140!important
+}
+ body#layout .visibility .layout-widget-state.visible{
+    background-image:url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaMSqb_wkkXpg9Irzm6Dt6M7s339ZvVYEglXmDSl1TQVVI29_vYlnd6OUaoZ2mVsoByyEANruBRbDsOJiMC_JeW_64T_yaN0dvMrEdFSMZrkwmT9gZD2hxF5feuWcm1P120XEL9oa5_Iw/s1600/visibility_c3_600_24dp.png)!important
+}
+ body#layout .visibility .layout-widget-state.not-visible{
+    background-image:url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhFOwRJFrLfctqWFu0mCJQLaxsWn12PkLZVg8tzu8NFpvl-NVG9xrsX2capzpWO9dImKjCWFDa0oDGCumLsQxihB4A17aLIio_8czUO0ivrhyphenhyphenryJaGBU1btMLB56PGGzHo1pgVh4lCupFA/s1600/visibility_off_c3_600_24dp.png)!important;
+    opacity:1
+}
+ body#layout div.layout-widget-description{
+    display:none;
+    font-size:11px;
+    line-height:1.2em
+}
+ body#layout #theme-options,body#layout #main-menu .widget{
+    display:block!important
+}
+ body#layout div.ify-panel{
+    background-color:#edf4ff!important;
+    overflow:hidden!important;
+    border-color:#cdd4ef
+}
+ body#layout .ify-panel .widget{
+    float:left;
+    width:49%;
+    margin-right:2%
+}
+ body#layout .ify-panel .widget-content{
+    border-color:#cdd4ef!important
+}
+ body#layout .ify-panel #HTML150{
+    margin-right:0
+}
+ body#layout .ify-panel div.layout-widget-description{
+    display:none
+}
+ body#layout .show-lightify-pro-mobile-menu,body#layout .search-toggle,body#layout #nav-search{
+    display:none
+}
+ body#layout .topbar-wrap > .container{
+    display:flex
+}
+ body#layout .main-navbar-menu,body#layout .main-navbar-social{
+    width:50%
+}
+ body#layout .header-content > .container{
+    display:flex
+}
+ body#layout .header-logo-wrap,body#layout .header-ads-wrap{
+    width:50%
+}
+ body#layout #content-wrapper{
+    padding:0;
+    margin:0
+}
+ body#layout #content-wrapper > .container{
+    display:flex;
+    margin:0
+}
+ body#layout #main-wrapper{
+    width:67%;
+    padding:0
+}
+ body#layout #sidebar-wrapper{
+    width:33%;
+    padding:0
+}
+ body#layout #custom-ads{
+    display:block!important;
+    display:flex!important
+}
+ body#layout #custom-ads .section{
+    width:50%
+}
+ body#layout #ify-panel > h4:after{
+    content:' - by Templateify.com'
+}
+ body#layout .section > h4:after{
+    font-size:12px
+}
+ body#layout #footer-about-section{
+    overflow:hidden!important
+}
+ body#layout #footer-about-section .widget{
+    float:left;
+    width:49%;
+    margin-right:2%
+}
+ body#layout #footer-about-section .TextList{
+    margin-right:0
+}
+body#layout .footer-widgets-wrap .container{
+    display:flex
+}
+ body#layout .footer-widgets-wrap div.footer-widget{
+    width:100%
+}
+ body#layout .footerbar .container{
+    display:flex
+}
+ body#layout #footer-menu,body#layout #footer-copyright{
+    width:50%
+}
+ body#layout #main-logo > h4:after{
+    content:' - Recommended Height (50px)'
+}
+ body#layout #lightify-pro-main-menu > h4:after{
+    content:' - With Sub Links, MegaMenu and MegaTabs'
+}
+ body#layout #main-navbar-menu > h4:after{
+    content:' - Top Links'
+}
+ body#layout #main-navbar-social > h4:after{
+    content:' - Social Icons'
+}
+ body#layout #header-ads > h4:after{
+    content:' - on All Pages'
+}
+ body#layout #break-section > h4:after{
+    content:' - Only Popular Post'
+} 
+ body#layout #featured > h4:after{
+    content:' - Recent or Label by (Shortcode)'
+}
+ body#layout #lightify-pro-content-blocks-1 > h4:after{
+    content:' - Drag & Drop Content Blocks by (Shortcode)'
+}
+ body#layout #home-ads-1 > h4:after{
+    content:' - Before Blog Posts on HomePage'
+}
+ body#layout #main > h4:after{
+    content:' - Default Blog Posts'
+}
+ body#layout #lightify-pro-main-before-ad > h4:after{
+    content:' - Before Post Content'
+}
+ body#layout #lightify-pro-main-after-ad > h4:after{
+    content:' - After Post Content'
+}
+ body#layout #home-ads-2 > h4:after{
+    content:' - After Blog Posts on HomePage'
+}
+ body#layout #lightify-pro-content-blocks-2 > h4:after{
+    content:' - Drag & Drop Content Blocks by (Shortcodes)'
+}
+ body#layout #lightify-pro-social-counter > h4:after{
+    content:' - Social Icons'
+}
+ body#layout #sidebar > h4:after,body#layout #sidebar-tabs > h4:after,body#layout #sidebar-b > h4:after{
+    content:' - on All Pages'
+}
+ body#layout #sidebar-ads > h4:after{
+    content:' - on Post Page'
+}
+ body#layout #footer-about-section > h4:after{
+    content:' - Site Logo, Description and Social Links'
+}
+ body#layout #footer-copyright > h4:after{
+    content:' - Custom Credits'
+}
+ body#layout #footer-menu > h4:after{
+    content:' - Footer Links'
+}
+ body#layout:after{
+    content:'Design by Templateify.com';
+    display:block;
+    font-family:Roboto,sans-serif;
+    font-size:14px;
+    color:#555;
+    line-height:1;
+    text-align:center;
+    visibility:visible;
+    padding:20px 0
+}
+
+]]></b:template-skin>
+    </b:if>

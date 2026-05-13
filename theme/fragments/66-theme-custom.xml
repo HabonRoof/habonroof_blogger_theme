@@ -1,0 +1,6 @@
+    <!-- Custom JavaScript (extensions after theme init) -->
+    <script type='text/javascript'>
+//<![CDATA[
+// Add custom tools here, or add a new fragment in theme/manifest.json after 64-theme-init.js.
+//]]>
+</script>
