@@ -1,6 +1,110 @@
     <!-- Custom JavaScript (extensions after theme init) -->
     <script type='text/javascript'>
 //<![CDATA[
-// Add custom tools here, or add a new fragment in theme/manifest.json after 64-theme-init.js.
+(function () {
+  var SUMMARIZE_ENDPOINT = 'https://plain-rice-b16a.johnson35762.workers.dev/summarize';
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function postPlainText(el) {
+    var clone = el.cloneNode(true);
+    var nodes = clone.querySelectorAll('script, style, noscript');
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      if (n.parentNode) n.parentNode.removeChild(n);
+    }
+    return (clone.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  ready(function () {
+    if (!document.body || !document.body.classList.contains('is-post')) return;
+    var bodyEl = document.getElementById('post-body');
+    if (!bodyEl || !bodyEl.parentNode) return;
+    if (bodyEl.parentNode.querySelector('.hr-ai-summarize')) return;
+
+    var MIN_MS_BETWEEN_CALLS = 60000;
+    var lastCallEnd = 0;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'hr-ai-summarize';
+    wrap.setAttribute('role', 'region');
+    wrap.setAttribute('aria-label', 'AI summary');
+    wrap.innerHTML =
+      '<div class="hr-ai-summarize-toolbar">' +
+      '<button type="button" class="hr-ai-summarize-btn">AI summarize</button>' +
+      '</div>' +
+      '<div class="hr-ai-summarize-status" aria-live="polite"></div>' +
+      '<div class="hr-ai-summarize-out" hidden></div>';
+
+    bodyEl.parentNode.insertBefore(wrap, bodyEl);
+
+    var btn = wrap.querySelector('.hr-ai-summarize-btn');
+    var statusEl = wrap.querySelector('.hr-ai-summarize-status');
+    var outEl = wrap.querySelector('.hr-ai-summarize-out');
+
+    function setBusy(busy) {
+      btn.disabled = !!busy;
+      btn.textContent = busy ? 'Summarizing…' : 'AI summarize';
+    }
+
+    btn.addEventListener('click', function () {
+      var now = Date.now();
+      if (now - lastCallEnd < MIN_MS_BETWEEN_CALLS && lastCallEnd > 0) {
+        var waitSec = Math.ceil((MIN_MS_BETWEEN_CALLS - (now - lastCallEnd)) / 1000);
+        statusEl.textContent = 'Please wait ' + waitSec + 's before summarizing again (saves API quota).';
+        return;
+      }
+
+      var text = postPlainText(bodyEl);
+      if (!text) {
+        statusEl.textContent = 'No post text found to summarize.';
+        outEl.hidden = true;
+        return;
+      }
+      statusEl.textContent = '';
+      outEl.hidden = true;
+      outEl.textContent = '';
+      setBusy(true);
+      fetch(SUMMARIZE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text }),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok) {
+              var gem =
+                data &&
+                data.details &&
+                data.details.error &&
+                data.details.error.message;
+              var msg = gem || (data && data.error) || res.statusText || 'Request failed';
+              if (res.status === 429) {
+                msg =
+                  'Summary is temporarily unavailable (Gemini quota or rate limit). Wait a minute and try again, or check billing in Google AI Studio.';
+              }
+              throw new Error(msg);
+            }
+            return data;
+          });
+        })
+        .then(function (data) {
+          if (!data || !data.summary) throw new Error('Invalid response');
+          outEl.textContent = data.summary;
+          outEl.hidden = false;
+        })
+        .catch(function (err) {
+          statusEl.textContent = err && err.message ? err.message : 'Summary failed.';
+        })
+        .finally(function () {
+          lastCallEnd = Date.now();
+          setBusy(false);
+        });
+    });
+  });
+})();
 //]]>
 </script>

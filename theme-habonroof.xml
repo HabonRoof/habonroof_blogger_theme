@@ -6140,6 +6140,90 @@ width:280px;
         width:100%
     }
 }
+
+/* AI summarize (theme custom) — above #post-body */
+.hr-ai-summarize {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65em;
+    margin: 0 0 1.35em;
+    padding: 0.85em 1em;
+    clear: both;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.025);
+}
+.hr-ai-summarize-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em 0.75em;
+}
+.hr-ai-summarize-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.35em;
+    padding: 0.4em 1em;
+    font: inherit;
+    font-size: 0.92em;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.06);
+    color: inherit;
+    flex: 0 1 auto;
+}
+.hr-ai-summarize-btn:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.1);
+}
+.hr-ai-summarize-btn:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+.hr-ai-summarize-status {
+    margin: 0;
+    font-size: 0.88em;
+    line-height: 1.45;
+    color: #b00020;
+}
+.hr-ai-summarize-out {
+    margin: 0;
+    padding: 0.75em 0.9em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 0.94em;
+    line-height: 1.55;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.55);
+}
+html[data-theme=dark] .hr-ai-summarize {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+}
+html[data-theme=dark] .hr-ai-summarize-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+html[data-theme=dark] .hr-ai-summarize-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+}
+html[data-theme=dark] .hr-ai-summarize-out {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.25);
+}
+@media screen and (max-width: 480px) {
+    .hr-ai-summarize-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
 ]]></b:skin>
     </b:if>
     <b:if cond='data:view.isLayoutMode'>
@@ -11728,7 +11812,111 @@ $(".post-body a").each(function() {
     <!-- Custom JavaScript (extensions after theme init) -->
     <script type='text/javascript'>
 //<![CDATA[
-// Add custom tools here, or add a new fragment in theme/manifest.json after 64-theme-init.js.
+(function () {
+  var SUMMARIZE_ENDPOINT = 'https://plain-rice-b16a.johnson35762.workers.dev/summarize';
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function postPlainText(el) {
+    var clone = el.cloneNode(true);
+    var nodes = clone.querySelectorAll('script, style, noscript');
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      if (n.parentNode) n.parentNode.removeChild(n);
+    }
+    return (clone.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  ready(function () {
+    if (!document.body || !document.body.classList.contains('is-post')) return;
+    var bodyEl = document.getElementById('post-body');
+    if (!bodyEl || !bodyEl.parentNode) return;
+    if (bodyEl.parentNode.querySelector('.hr-ai-summarize')) return;
+
+    var MIN_MS_BETWEEN_CALLS = 60000;
+    var lastCallEnd = 0;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'hr-ai-summarize';
+    wrap.setAttribute('role', 'region');
+    wrap.setAttribute('aria-label', 'AI summary');
+    wrap.innerHTML =
+      '<div class="hr-ai-summarize-toolbar">' +
+      '<button type="button" class="hr-ai-summarize-btn">AI summarize</button>' +
+      '</div>' +
+      '<div class="hr-ai-summarize-status" aria-live="polite"></div>' +
+      '<div class="hr-ai-summarize-out" hidden></div>';
+
+    bodyEl.parentNode.insertBefore(wrap, bodyEl);
+
+    var btn = wrap.querySelector('.hr-ai-summarize-btn');
+    var statusEl = wrap.querySelector('.hr-ai-summarize-status');
+    var outEl = wrap.querySelector('.hr-ai-summarize-out');
+
+    function setBusy(busy) {
+      btn.disabled = !!busy;
+      btn.textContent = busy ? 'Summarizing…' : 'AI summarize';
+    }
+
+    btn.addEventListener('click', function () {
+      var now = Date.now();
+      if (now - lastCallEnd < MIN_MS_BETWEEN_CALLS && lastCallEnd > 0) {
+        var waitSec = Math.ceil((MIN_MS_BETWEEN_CALLS - (now - lastCallEnd)) / 1000);
+        statusEl.textContent = 'Please wait ' + waitSec + 's before summarizing again (saves API quota).';
+        return;
+      }
+
+      var text = postPlainText(bodyEl);
+      if (!text) {
+        statusEl.textContent = 'No post text found to summarize.';
+        outEl.hidden = true;
+        return;
+      }
+      statusEl.textContent = '';
+      outEl.hidden = true;
+      outEl.textContent = '';
+      setBusy(true);
+      fetch(SUMMARIZE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text }),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            if (!res.ok) {
+              var gem =
+                data &&
+                data.details &&
+                data.details.error &&
+                data.details.error.message;
+              var msg = gem || (data && data.error) || res.statusText || 'Request failed';
+              if (res.status === 429) {
+                msg =
+                  'Summary is temporarily unavailable (Gemini quota or rate limit). Wait a minute and try again, or check billing in Google AI Studio.';
+              }
+              throw new Error(msg);
+            }
+            return data;
+          });
+        })
+        .then(function (data) {
+          if (!data || !data.summary) throw new Error('Invalid response');
+          outEl.textContent = data.summary;
+          outEl.hidden = false;
+        })
+        .catch(function (err) {
+          statusEl.textContent = err && err.message ? err.message : 'Summary failed.';
+        })
+        .finally(function () {
+          lastCallEnd = Date.now();
+          setBusy(false);
+        });
+    });
+  });
+})();
 //]]>
 </script>
     <!-- Mobile Menu, Overlay and Back To Top -->
