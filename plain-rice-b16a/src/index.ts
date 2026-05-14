@@ -1,5 +1,6 @@
 /**
- * Blogger summarize proxy: POST /summarize with JSON { "text": "..." }.
+ * Blogger summarize proxy: POST /summarize with JSON { "text": "...", "locale": "en-US" }.
+ * `locale` is optional BCP-47; invalid or missing values default to English output.
  * Set secret GEMINI_API_KEY (wrangler secret put GEMINI_API_KEY).
  * Optional vars: GEMINI_MODEL (default gemini-3.1-flash-lite), ALLOWED_ORIGINS (comma-separated exact origins).
  *
@@ -10,6 +11,19 @@
 
 const DEFAULT_MODEL = "gemini-3.1-flash-lite";
 const MAX_INPUT_CHARS = 32000;
+const LOCALE_TAG_MAX = 35;
+/** BCP-47 primary tag + optional subtags (no user-controlled prose). */
+const LOCALE_TAG_PATTERN = /^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$/;
+
+function normalizeClientLocale(raw: unknown): string {
+	if (typeof raw !== "string") return "en";
+	let s = raw.trim().slice(0, LOCALE_TAG_MAX);
+	if (!s) return "en";
+	s = s.split(",")[0].split(";")[0].trim();
+	s = s.replace(/_/g, "-").replace(/-+/g, "-");
+	if (!LOCALE_TAG_PATTERN.test(s)) return "en";
+	return s;
+}
 
 function parseAllowedOrigins(raw: string | undefined): string[] {
 	if (!raw || !raw.trim()) return [];
@@ -103,12 +117,20 @@ export default {
 			return jsonResponse(request, env, { error: 'Expected JSON object with string "text"' }, 400);
 		}
 
+		const localeRaw =
+			typeof payload === "object" && payload !== null && "locale" in payload
+				? (payload as { locale: unknown }).locale
+				: undefined;
+		const locale = normalizeClientLocale(localeRaw);
+
 		const clipped = text.length > MAX_INPUT_CHARS ? text.slice(0, MAX_INPUT_CHARS) : text;
 		const model = (env.GEMINI_MODEL && env.GEMINI_MODEL.trim()) || DEFAULT_MODEL;
 
 		const systemPrompt =
-			"You summarize blog posts for readers. Use 100 words to summarize the artical, and output 3-6 short bullet points. Use plain text with each bullet on its own line starting with '- '. " +
-			"Stay faithful to the provided text; do not invent facts. If the text is too short, say so briefly.";
+			"You summarize blog posts for readers. Use 100-300 words to summarize the article, and output 3-6 short bullet points. Use plain text with each bullet on its own line starting with '- '. " +
+			"Stay faithful to the provided text; do not invent facts. If the text is too short, say so briefly. " +
+			`The reader's required output language is BCP-47 "${locale}". Every word of your reply (intro paragraph and every bullet) MUST be in that language only. ` +
+			"If the article is in a different language, translate the substance into that required language; do not mirror the article's writing language when it differs.";
 
 		const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
 
@@ -123,7 +145,14 @@ export default {
 				contents: [
 					{
 						role: "user",
-						parts: [{ text: clipped }],
+						parts: [
+							{
+								text:
+									`Summarize the blog post below. Required response language (BCP-47): ${locale}. ` +
+									"Write the full summary only in that language.\n\n---\n\n" +
+									clipped,
+							},
+						],
 					},
 				],
 				generationConfig: {

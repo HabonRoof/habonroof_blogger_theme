@@ -3,10 +3,45 @@
 //<![CDATA[
 (function () {
   var SUMMARIZE_ENDPOINT = 'https://plain-rice-b16a.johnson35762.workers.dev/summarize';
+  var LOCALE_STORAGE_KEY = 'hr_summarize_locale';
+  var LOCALE_TAG_MAX = 35;
+  var LOCALE_TAG_PATTERN = /^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$/;
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
     else fn();
+  }
+
+  function normalizeLocaleTag(s) {
+    if (!s || typeof s !== 'string') return '';
+    s = s.trim().slice(0, LOCALE_TAG_MAX).split(',')[0].split(';')[0].trim();
+    s = s.replace(/_/g, '-').replace(/-+/g, '-');
+    if (!LOCALE_TAG_PATTERN.test(s)) return '';
+    return s;
+  }
+
+  function autoResolvedLocale() {
+    var h = normalizeLocaleTag(document.documentElement.getAttribute('lang') || '');
+    if (h) return h;
+    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    var n = normalizeLocaleTag(nav);
+    return n || 'en';
+  }
+
+  function preferredLocaleForRequest() {
+    try {
+      var st = localStorage.getItem(LOCALE_STORAGE_KEY);
+      var n = normalizeLocaleTag(st || '');
+      if (n) return n;
+    } catch (e) {}
+    return autoResolvedLocale();
+  }
+
+  /** Prefer the visible language dropdown value so the request matches the UI even if localStorage fails. */
+  function localeForApi(sel) {
+    var fromSelect = normalizeLocaleTag(sel && sel.value ? sel.value : '');
+    if (fromSelect) return fromSelect;
+    return preferredLocaleForRequest();
   }
 
   function postPlainText(el) {
@@ -17,6 +52,29 @@
       if (n.parentNode) n.parentNode.removeChild(n);
     }
     return (clone.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function syncLocaleSelectFromStorage(sel) {
+    var norm = '';
+    try {
+      norm = normalizeLocaleTag(localStorage.getItem(LOCALE_STORAGE_KEY) || '');
+    } catch (e) {}
+    if (norm) {
+      var has = false;
+      for (var oi = 0; oi < sel.options.length; oi++) {
+        if (sel.options[oi].value === norm) {
+          has = true;
+          break;
+        }
+      }
+      if (has) sel.value = norm;
+      else {
+        try {
+          localStorage.removeItem(LOCALE_STORAGE_KEY);
+        } catch (e2) {}
+        sel.value = '';
+      }
+    } else sel.value = '';
   }
 
   ready(function () {
@@ -35,6 +93,30 @@
     wrap.innerHTML =
       '<div class="hr-ai-summarize-toolbar">' +
       '<button type="button" class="hr-ai-summarize-btn">AI summarize</button>' +
+      '<label class="hr-ai-summarize-locale-label">' +
+      'Language ' +
+      '<select class="hr-ai-summarize-locale" aria-label="Summary language">' +
+      '<option value="">Auto</option>' +
+      '<option value="en">English</option>' +
+      '<option value="zh-TW">中文（繁體）</option>' +
+      '<option value="zh-CN">中文（简体）</option>' +
+      '<option value="ja">日本語</option>' +
+      '<option value="ko">한국어</option>' +
+      '<option value="es">Español</option>' +
+      '<option value="fr">Français</option>' +
+      '<option value="de">Deutsch</option>' +
+      '<option value="pt-BR">Português (BR)</option>' +
+      '<option value="vi">Tiếng Việt</option>' +
+      '<option value="th">ไทย</option>' +
+      '<option value="id">Bahasa Indonesia</option>' +
+      '<option value="it">Italiano</option>' +
+      '<option value="nl">Nederlands</option>' +
+      '<option value="pl">Polski</option>' +
+      '<option value="tr">Türkçe</option>' +
+      '<option value="ru">Русский</option>' +
+      '<option value="ar">العربية</option>' +
+      '</select>' +
+      '</label>' +
       '</div>' +
       '<div class="hr-ai-summarize-status" aria-live="polite"></div>' +
       '<div class="hr-ai-summarize-out" hidden></div>';
@@ -44,10 +126,21 @@
     var btn = wrap.querySelector('.hr-ai-summarize-btn');
     var statusEl = wrap.querySelector('.hr-ai-summarize-status');
     var outEl = wrap.querySelector('.hr-ai-summarize-out');
+    var localeSelect = wrap.querySelector('.hr-ai-summarize-locale');
+    syncLocaleSelectFromStorage(localeSelect);
+
+    localeSelect.addEventListener('change', function () {
+      var v = localeSelect.value;
+      try {
+        if (!v) localStorage.removeItem(LOCALE_STORAGE_KEY);
+        else localStorage.setItem(LOCALE_STORAGE_KEY, v);
+      } catch (e) {}
+    });
 
     function setBusy(busy) {
       btn.disabled = !!busy;
       btn.textContent = busy ? 'Summarizing…' : 'AI summarize';
+      localeSelect.disabled = !!busy;
     }
 
     btn.addEventListener('click', function () {
@@ -71,7 +164,7 @@
       fetch(SUMMARIZE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text }),
+        body: JSON.stringify({ text: text, locale: localeForApi(localeSelect) }),
       })
         .then(function (res) {
           return res.json().then(function (data) {
