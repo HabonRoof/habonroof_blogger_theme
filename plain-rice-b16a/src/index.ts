@@ -107,7 +107,7 @@ export default {
 		const model = (env.GEMINI_MODEL && env.GEMINI_MODEL.trim()) || DEFAULT_MODEL;
 
 		const systemPrompt =
-			"You summarize blog posts for readers. Output 3-6 short bullet points. Use plain text with each bullet on its own line starting with '- '. " +
+			"You summarize blog posts for readers. Use 100-300 words to summarize the artical, and output 3-6 short bullet points. Use plain text with each bullet on its own line starting with '- '. " +
 			"Stay faithful to the provided text; do not invent facts. If the text is too short, say so briefly.";
 
 		const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
