@@ -20,7 +20,8 @@
     <link href='//www.blogger.com' rel='dns-prefetch'/>
     <link href='//dnjs.cloudflare.com' rel='dns-prefetch'/>
     <link href='//fonts.gstatic.com' rel='dns-prefetch'/>
-    <link href='//pagead2.googlesyndication.com' rel='dns-prefetch'/>
+    <!-- [AD-FREE] AdSense DNS prefetch 暫時停用；恢復廣告時取消註解 -->
+    <!-- <link href='//pagead2.googlesyndication.com' rel='dns-prefetch'/> -->
     <link href='//www.googletagmanager.com' rel='dns-prefetch'/>
     <link href='//www.google-analytics.com' rel='dns-prefetch'/>
     <link href='//connect.facebook.net' rel='dns-prefetch'/>

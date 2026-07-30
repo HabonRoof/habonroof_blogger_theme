@@ -5411,6 +5411,16 @@ position: relative;
     display:block;
     text-align:center
 }
+/* [AD-FREE] 隱藏廣告版面容器，恢復廣告時刪除此區塊 */
+.header-ads-wrap,
+#home-ads-1,
+#home-ads-2,
+#sidebar-ads,
+#custom-ads,
+#lightify-pro-main-before-ad,
+#lightify-pro-main-after-ad{
+    display:none!important
+}
 ins.adsbygoogle-noablate[data-anchor-shown="true"]{
 z-index:990!important
 }
