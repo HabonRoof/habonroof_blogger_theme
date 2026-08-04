@@ -351,7 +351,6 @@ document.addEventListener("DOMContentLoaded", initYouTubeVideos);
               </b:widget>
             </b:section>
             <b:section class='sidebar lightify-pro-widget-ready' id='sidebar-b' name='Sidebar B' showaddelement='yes'>
-              <!-- [AD-FREE] Sidebar B 廣告暫時停用（HTML9 visible=false）。恢復：改回 visible='true' -->
               <b:widget id='HTML9' locked='false' title='點點廣告贊助我！' type='HTML' version='2' visible='false'>
                 <b:widget-settings>
                   <b:widget-setting name='content'><![CDATA[<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5249076638958500" crossorigin="anonymous"></script>
@@ -675,9 +674,8 @@ document.addEventListener("DOMContentLoaded", initYouTubeVideos);
                 </b:includable>
               </b:widget>
             </b:section>
-            <!-- [AD-FREE] Sidebar ADS 暫時停用（HTML15 visible=false）。恢復：改回 visible='true' -->
             <b:section class='sidebar lightify-pro-widget-ready' cond='data:view.isPost' id='sidebar-ads' maxwidgets='1' name='Sidebar ADS' showaddelement='yes'>
-              <b:widget id='HTML15' locked='false' title='點點我 贊助我' type='HTML' version='2' visible='false'>
+              <b:widget id='HTML15' locked='false' title='點點我 贊助我' type='HTML' version='2' visible='true'>
                 <b:widget-settings>
                   <b:widget-setting name='content'><![CDATA[<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5249076638958500" crossorigin="anonymous"></script>
 <!-- 右邊欄廣告1 -->

@@ -108,7 +108,6 @@
                 </b:includable>
               </b:widget>
             </b:section>
-            <!-- [AD-FREE] Home ADS 1 暫時停用（HTML7 visible=false）。恢復：改回 visible='true' -->
             <b:section class='home-ad' cond='data:view.isHomepage' id='home-ads-1' maxwidgets='1' name='Home ADS 1' showaddelement='yes'>
               <b:widget id='HTML7' locked='false' title='文章分類廣告測試1' type='HTML' version='2' visible='false'>
                 <b:widget-settings>
@@ -374,11 +373,8 @@
                   </b:if>
                 </b:includable>
                 <b:includable id='defaultAdUnit'>
-                  <!-- [AD-FREE] defaultAdUnit 暫時停用。恢復時取消下方註解 -->
-                  <!--
                   <ins class='adsbygoogle' data-ad-format='fluid' data-ad-layout-key='-ha-g+68-c3+1n' data-full-width-responsive='false' expr:data-ad-client='data:adClientId ?: data:blog.adsenseClientId' expr:data-ad-host='data:blog.adsenseHostId' expr:data-analytics-uacct='data:blog.analyticsAccountNumber' expr:style='data:style ?: &quot;display: block;&quot;' style='display:block'/>
                   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                  -->
                 </b:includable>
                 <b:includable id='emailPostIcon'>
                   <b:comment>Removed :)</b:comment>
@@ -574,8 +570,8 @@
                   </b:if>
                 </b:includable>
                 <b:includable id='postCommentsAndAd' var='post'>
-                  <!-- [AD-FREE] In-Feed Ads 暫時停用。恢復時取消下方註解 -->
-                  <!-- <b:include cond='data:view.isMultipleItems and not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/> -->
+                  <!-- In-Feed Ads -->
+                  <b:include cond='data:view.isMultipleItems and not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/>
                   <article class='blog-post hentry'>
                     <b:class cond='data:view.isMultipleItems' expr:name='&quot;index-post post-&quot; + data:i'/>
                     <b:class cond='data:view.isSingleItem' name='item-post'/>
@@ -999,7 +995,6 @@
                 </b:includable>
               </b:widget>
             </b:section>
-            <!-- [AD-FREE] Post ADS / Home ADS 2 暫時停用（HTML11/12/13 visible=false）。恢復：把對應 widget 的 visible 改回 true -->
             <b:tag cond='data:view.isPost or data:view.isLayoutMode' id='custom-ads' name='div'>
               <b:section cond='data:view.isPost' id='lightify-pro-main-before-ad' maxwidgets='1' name='Post ADS 1' showaddelement='yes'>
                 <b:widget id='HTML12' locked='false' title='' type='HTML' version='2' visible='false'>
@@ -1050,7 +1045,7 @@
               </b:section>
             </b:tag>
             <b:section class='home-ad' cond='data:view.isHomepage' id='home-ads-2' maxwidgets='1' name='Home ADS 2' showaddelement='yes'>
-              <b:widget id='HTML11' locked='false' title='頁尾矩陣廣告' type='HTML' version='2' visible='false'>
+              <b:widget id='HTML11' locked='false' title='頁尾矩陣廣告' type='HTML' version='2' visible='true'>
                 <b:widget-settings>
                   <b:widget-setting name='content'><![CDATA[<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5249076638958500" crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
@@ -1076,7 +1071,6 @@
                 </b:includable>
               </b:widget>
             </b:section>
-            <!-- [AD-FREE] Content Blocks 2 內嵌廣告暫時停用（HTML10 visible=false）。恢復：改回 visible='true' -->
             <b:section class='lightify-pro-content-blocks' cond='data:view.isHomepage' id='lightify-pro-content-blocks-2' name='Content Blocks 2' showaddelement='yes'>
               <b:widget id='HTML10' locked='false' title='' type='HTML' version='2' visible='false'>
                 <b:widget-settings>

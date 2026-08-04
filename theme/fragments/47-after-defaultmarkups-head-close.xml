@@ -1,10 +1,8 @@
     </b:defaultmarkups>
-    <!-- [AD-FREE] Google AdSense 全域腳本暫時停用；恢復廣告時取消註解 -->
-    <!--
     <b:if cond='data:widgets.AdSense.first or data:blog.adsenseClientId'>
+      <!-- Google AdSense -->
       <script async='async' src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'/>
     </b:if>
-    -->
     <b:if cond='data:blog.analyticsAccountNumber != &quot;&quot;'>
       <!-- Google Analytics -->
       <b:include data='blog' name='google-analytics'/>
